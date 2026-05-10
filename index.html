@@ -16,7 +16,16 @@
         body {
             font-family: 'Assistant', sans-serif;
         }
+        /* עיצוב לאינפוגרפיקה */
+        .infographic-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--box-shadow-soft);
+        }
     </style>
+    <!-- ספריית Chart.js לאינפוגרפיקה מתקדמת (לא נלמד בקורס) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -110,9 +119,9 @@
                     </div>
                     <div class="col-lg-6 reveal active">
                         <div class="position-relative">
-                            <img src="images/israel.png" alt="נוף ישראלי מרהיב המייצג אחדות ואחריות אזרחית" class="img-fluid hero-image">
+                            <img src="images/israel.png" alt="נוף ישראלי מרהיב המייצג אחדות ואחריות אזרחית" class="img-fluid hero-image rounded-5 shadow-lg">
                             <!-- Floating Stat Card -->
-                            <div class="glass-card position-absolute bottom-0 start-0 mb-n4 ms-n4 d-none d-md-block" style="max-width: 250px;">
+                            <div class="glass-card position-absolute bottom-0 start-0 mb-n4 ms-n4 d-none d-md-block" style="max-width: 250px; z-index: 10;">
                                 <h4 class="h5 mb-2">מדינת ישראל</h4>
                                 <p class="small text-muted mb-0">הבית שלנו, הבחירה שלנו.</p>
                             </div>
@@ -149,6 +158,28 @@
                         <div class="p-4">
                             <h3 class="display-5 fw-bold text-primary">1</h3>
                             <p class="text-muted">יום שבתון</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Infographic Section (Advanced Content) -->
+        <section id="infographic" class="py-5 bg-light">
+            <div class="container py-5">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6 reveal">
+                        <h2 class="h1 mb-4">הכוח של הקול שלך במספרים</h2>
+                        <p class="lead text-muted mb-4">אינפוגרפיקה מתקדמת המציגה את עליית המעורבות האזרחית בשנים האחרונות. כל קול שנוסף משפיע על עתיד המדינה.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> נתונים בזמן אמת על אחוזי הצבעה</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השוואה בין שנים קודמות</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השפעת הצעירים על התוצאות</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 reveal">
+                        <div class="infographic-container">
+                            <canvas id="votingChart"></canvas>
                         </div>
                     </div>
                 </div>

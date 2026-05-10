@@ -228,4 +228,77 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    /* 
+       4. תוכן מתקדם (Advanced Content) - Chart.js Infographic
+       זהו חלק מתקדם שאינו נלמד בקורס הבסיסי. 
+       הוא משתמש בספריית Chart.js ליצירת אינפוגרפיקה אינטראקטיבית מבוססת נתונים.
+    */
+    const initInfographic = () => {
+        const ctx = document.getElementById('votingChart');
+        if (!ctx) return;
+
+        // הגדרות הגרף
+        new Chart(ctx, {
+            type: 'line', // סוג הגרף: קו
+            data: {
+                labels: ['2015', '2019א', '2019ב', '2020', '2021', '2022', '2026 (צפי)'],
+                datasets: [{
+                    label: 'אחוז מעורבות אזרחית (%)',
+                    data: [72, 68, 69, 71, 67, 70, 75],
+                    backgroundColor: 'rgba(75, 0, 130, 0.2)',
+                    borderColor: 'rgba(75, 0, 130, 1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4, // קימור הקו לאפקט מודרני
+                    pointBackgroundColor: 'rgba(75, 0, 130, 1)',
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            font: {
+                                family: 'Assistant',
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: { family: 'Assistant', size: 16 },
+                        bodyFont: { family: 'Assistant', size: 14 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 60,
+                        ticks: {
+                            font: { family: 'Assistant' }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: { family: 'Assistant' }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+    };
+
+    // הפעלת האינפוגרפיקה
+    initInfographic();
 });
+
+
