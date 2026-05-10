@@ -1,0 +1,499 @@
+/* 
+   הגדרת משתני עיצוב (CSS Variables) - מאפשר לשלוט על הצבעים והעיצוב 
+   ממקום אחד בקלות עבור כל האתר.
+*/
+:root {
+    --primary-color: #4B0082; /* סגול כהה - צבע ראשי */
+    --primary-light: #6a11cb; /* סגול בהיר - למעברי צבע */
+    --secondary-color: #E6E6FA; /* לבנדר בהיר - לרקעים */
+    --accent-color: #ADD8E6; /* כחול רך - להדגשות */
+    --accent-dark: #4682B4;
+    --text-color: #2c3e50; /* צבע טקסט כהה וקריא */
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.7); /* רקע זכוכית שקוף */
+    --transition-speed: 0.4s; /* מהירות האנימציות באתר */
+    --box-shadow-soft: 0 10px 30px rgba(0,0,0,0.08); /* צל עדין לכרטיסים */
+    --box-shadow-hover: 0 20px 40px rgba(0,0,0,0.15); /* צל חזק יותר במעבר עכבר */
+}
+
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --text-color: #f8f9fa;
+    --white: #1a1a1a;
+    --glass-bg: rgba(40, 40, 40, 0.8);
+    --secondary-color: #2d2d4d;
+    --accent-color: #3d5a80;
+    --box-shadow-soft: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: #f8f9fa;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] body {
+    background-color: #121212;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
+
+/* Typography */
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Header & Nav */
+.navbar {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    transition: all 0.3s;
+}
+
+[data-theme="dark"] .navbar {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+
+/* עיצוב הלוגו בראש הדף */
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.8rem;
+    line-height: 1;
+    position: relative;
+    text-decoration: none;
+}
+
+/* עיצוב האייקון החדש בלוגו */
+.logo-icon-wrapper {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(75, 0, 130, 0.2);
+}
+
+.navbar-brand span {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+
+.navbar-tagline {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 2px;
+    letter-spacing: 0;
+    -webkit-text-fill-color: initial; /* Reset gradient for tagline */
+}
+
+
+.navbar-brand::before {
+    content: '●';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--primary-light);
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    margin: 0 12px;
+    position: relative;
+    transition: all var(--transition-speed);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: translateY(-2px);
+}
+
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.hero-image {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transition: transform var(--transition-speed);
+}
+
+.hero-image:hover {
+    transform: scale(1.02);
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-speed);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(75, 0, 130, 0.4);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 12px 33px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all var(--transition-speed);
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+/* Cards & Glassmorphism */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--box-shadow-soft);
+    transition: all var(--transition-speed);
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-hover);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.card {
+    border: 1px solid rgba(0,0,0,0.03);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow-soft);
+    transition: all var(--transition-speed);
+    height: 100%;
+    overflow: hidden;
+    background: var(--white);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(75, 0, 130, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    color: var(--primary-color);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    transition: transform var(--transition-speed);
+}
+
+.card:hover .icon-box {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Section Decor */
+.section-title {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+
+/* Steps Section */
+.step-item {
+    position: relative;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-right: 5px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.step-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-left: 10px;
+}
+
+/* Quiz Section */
+.quiz-container {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.quiz-question {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.progress {
+    height: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+#quiz-result {
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+}
+
+/* Form */
+.form-control {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(75, 0, 130, 0.25);
+    border-color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 50px 0 20px;
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--white);
+}
+
+/* Countdown Timer */
+.countdown-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.countdown-box {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: var(--box-shadow-soft);
+}
+
+.countdown-box span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.countdown-box label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+/* Back to Top Button */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: var(--box-shadow-hover);
+    transition: all 0.3s;
+    border: none;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    background: var(--primary-light);
+}
+
+/* Dark Mode Toggle */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* RTL Adjustments */
+[dir="rtl"] .ms-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+
+
+[dir="rtl"] .me-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
