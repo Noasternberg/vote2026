@@ -23,34 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
 
     /* 
-       0.1 החלפת מצב כהה/בהיר (Dark Mode):
-       שומר את העדפת המשתמש ב-localStorage כדי שהיא תישמר גם לאחר רענון הדף.
-    */
-    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            toggleSwitch.checked = true;
-        }
-    }
-
-    function switchTheme(e) {
-        if (e.target.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        }    
-    }
-
-    if (toggleSwitch) {
-        toggleSwitch.addEventListener('change', switchTheme, false);
-    }
-
-    /* 
        0.2 טיימר ספירה לאחור לבחירות:
        מחשב את הזמן שנותר עד לתאריך היעד ומעדכן את התצוגה בכל שנייה.
     */
@@ -358,4 +330,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // הפעלת האינפוגרפיקה
     initInfographic();
+
+    /* 
+       5. סרגל נגישות (Accessibility Toolbar)
+    */
+    const accessibilityToolbar = document.getElementById('accessibility-toolbar');
+    const toggleToolbarBtn = document.getElementById('toggle-toolbar');
+    const body = document.body;
+
+    if (toggleToolbarBtn) {
+        toggleToolbarBtn.addEventListener('click', () => {
+            accessibilityToolbar.classList.toggle('active');
+            const isExpanded = accessibilityToolbar.classList.contains('active');
+            toggleToolbarBtn.setAttribute('aria-expanded', isExpanded);
+        });
+    }
+
+    // פונקציות נגישות
+    const accessibilityActions = {
+        'btn-increase-font': () => {
+            if (body.classList.contains('large-font')) {
+                body.classList.replace('large-font', 'xlarge-font');
+            } else {
+                body.classList.add('large-font');
+            }
+        },
+        'btn-decrease-font': () => {
+            body.classList.remove('large-font', 'xlarge-font');
+        },
+        'btn-grayscale': () => body.classList.toggle('grayscale'),
+        'btn-high-contrast': () => body.classList.toggle('high-contrast'),
+        'btn-underline-links': () => body.classList.toggle('underline-links'),
+        'btn-reset-accessibility': () => {
+            body.classList.remove('large-font', 'xlarge-font', 'grayscale', 'high-contrast', 'underline-links');
+        }
+    };
+
+    Object.keys(accessibilityActions).forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', accessibilityActions[id]);
+        }
+    });
 });

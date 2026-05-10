@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,11 @@
     <style>
         /* הגדרת פונט אסיסטנט לכל האתר (מתאים מאוד לעברית) */
         @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&display=swap');
+
         body {
             font-family: 'Assistant', sans-serif;
         }
+
         /* עיצוב לאינפוגרפיקה */
         .infographic-container {
             background: var(--white);
@@ -29,7 +32,30 @@
     <!-- תוסף להצגת מספרים ישירות על הגרף (מתקדם) -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
-<body>
+
+<body class="bg-light">
+    <!-- קישור דילוג לתוכן (נגישות) -->
+    <a href="#home" class="visually-hidden-focusable p-2 bg-primary text-white position-absolute top-0 start-0 z-5">דלג לתוכן המרכזי</a>
+
+    <!-- Accessibility Toolbar (נגישות) -->
+    <div id="accessibility-toolbar" class="accessibility-toolbar" aria-label="סרגל נגישות">
+        <button id="toggle-toolbar" class="toolbar-toggle" aria-label="פתח תפריט נגישות" aria-expanded="false" title="תפריט נגישות">
+            <i class="bi bi-person-wheelchair"></i>
+        </button>
+        <div class="toolbar-menu shadow-lg">
+            <h5 class="p-3 mb-0 border-bottom small fw-bold text-center">תפריט נגישות</h5>
+            <div class="p-3">
+                <div class="d-grid gap-2">
+                    <button id="btn-increase-font" class="btn btn-sm btn-outline-primary text-end"><i class="bi bi-zoom-in me-2"></i> הגדלת טקסט</button>
+                    <button id="btn-decrease-font" class="btn btn-sm btn-outline-primary text-end"><i class="bi bi-zoom-out me-2"></i> הקטנת טקסט</button>
+                    <button id="btn-grayscale" class="btn btn-sm btn-outline-primary text-end"><i class="bi bi-droplet-half me-2"></i> גווני אפור</button>
+                    <button id="btn-high-contrast" class="btn btn-sm btn-outline-primary text-end"><i class="bi bi-circle-half me-2"></i> ניגודיות גבוהה</button>
+                    <button id="btn-underline-links" class="btn btn-sm btn-outline-primary text-end"><i class="bi bi-link-45deg me-2"></i> הדגשת קישורים</button>
+                    <button id="btn-reset-accessibility" class="btn btn-sm btn-danger mt-2 text-center">איפוס הגדרות</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header + Navigation -->
     <header class="sticky-top">
@@ -46,7 +72,8 @@
                     </div>
                 </a>
                 <!-- כפתור המבורגר למובייל -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="הצג תפריט">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="הצג תפריט">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- תפריט הניווט -->
@@ -68,14 +95,6 @@
                             <a class="nav-link" href="#contact">צור קשר</a>
                         </li>
                     </ul>
-                    <!-- Theme Toggle -->
-                    <div class="theme-switch-wrapper ms-3">
-                        <label class="theme-switch" for="checkbox">
-                            <input type="checkbox" id="checkbox" />
-                            <div class="slider round"></div>
-                        </label>
-                        <em class="ms-2 small d-none d-md-inline"><i class="bi bi-moon-stars"></i></em>
-                    </div>
                 </div>
 
             </div>
@@ -87,17 +106,20 @@
         <section id="home" class="hero-section position-relative">
             <!-- Decorative Background Shape -->
             <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: 0; opacity: 0.1;">
-                <div class="bg-primary rounded-circle" style="width: 500px; height: 500px; position: absolute; top: -250px; left: -250px;"></div>
-                <div class="bg-info rounded-circle" style="width: 300px; height: 300px; position: absolute; bottom: -150px; right: -150px;"></div>
+                <div class="bg-primary rounded-circle"
+                    style="width: 500px; height: 500px; position: absolute; top: -250px; left: -250px;"></div>
+                <div class="bg-info rounded-circle"
+                    style="width: 300px; height: 300px; position: absolute; bottom: -150px; right: -150px;"></div>
             </div>
-            
+
             <div class="container position-relative" style="z-index: 1;">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-5 mb-lg-0 reveal active">
                         <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">בחירות 2026</span>
                         <h1 class="display-3 fw-bold mb-4">הקול שלך משפיע</h1>
-                        <p class="lead mb-4 text-secondary">הצבעה היא דרך פשוטה לקחת חלק, להשפיע ולממש אחריות אזרחית. בואו נבטיח שהקול של כולם יישמע ונבנה יחד עתיד טוב יותר.</p>
-                        
+                        <p class="lead mb-4 text-secondary">הצבעה היא דרך פשוטה לקחת חלק, להשפיע ולממש אחריות אזרחית.
+                            בואו נבטיח שהקול של כולם יישמע ונבנה יחד עתיד טוב יותר.</p>
+
                         <!-- Countdown Timer -->
                         <div class="countdown-container mb-5 reveal">
                             <div class="countdown-box">
@@ -121,9 +143,11 @@
                     </div>
                     <div class="col-lg-6 reveal active">
                         <div class="position-relative">
-                            <img src="images/israel.png" alt="נוף ישראלי מרהיב המייצג אחדות ואחריות אזרחית" class="img-fluid hero-image rounded-5 shadow-lg">
+                            <img src="images/israel.png" alt="נוף ישראלי מרהיב המייצג אחדות ואחריות אזרחית"
+                                class="img-fluid hero-image rounded-5 shadow-lg">
                             <!-- Floating Stat Card -->
-                            <div class="glass-card position-absolute bottom-0 start-0 mb-n4 ms-n4 d-none d-md-block" style="max-width: 250px; z-index: 10;">
+                            <div class="glass-card position-absolute bottom-0 start-0 mb-n4 ms-n4 d-none d-md-block"
+                                style="max-width: 250px; z-index: 10;">
                                 <h4 class="h5 mb-2">מדינת ישראל</h4>
                                 <p class="small text-muted mb-0">הבית שלנו, הבחירה שלנו.</p>
                             </div>
@@ -172,11 +196,15 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6 reveal">
                         <h2 class="h1 mb-4">הכוח של הקול שלך במספרים</h2>
-                        <p class="lead text-muted mb-4">מגמת המעורבות האזרחית בישראל נמצאת בעלייה מתמדת. הגרף שלפניכם מציג את אחוז האזרחים שבחרו לקחת אחריות ולהשפיע על עתיד המדינה בשנים האחרונות.</p>
+                        <p class="lead text-muted mb-4">מגמת המעורבות האזרחית בישראל נמצאת בעלייה מתמדת. הגרף שלפניכם
+                            מציג את אחוז האזרחים שבחרו לקחת אחריות ולהשפיע על עתיד המדינה בשנים האחרונות.</p>
                         <ul class="list-unstyled">
-                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> נתונים בזמן אמת על אחוזי הצבעה</li>
-                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השוואה בין שנים קודמות</li>
-                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השפעת הצעירים על התוצאות</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> נתונים בזמן אמת
+                                על אחוזי הצבעה</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השוואה בין שנים
+                                קודמות</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> השפעת הצעירים על
+                                התוצאות</li>
                         </ul>
                     </div>
                     <div class="col-lg-6 reveal">
@@ -193,7 +221,8 @@
             <div class="container py-5">
                 <div class="text-center mb-5 reveal">
                     <h2 class="h1 section-title">למה חשוב להצביע?</h2>
-                    <p class="text-muted lead mx-auto" style="max-width: 700px;">ההשתתפות שלך היא הלב של הדמוקרטיה. כשאתה מצביע, אתה לא רק בוחר - אתה משתתף בעיצוב המציאות.</p>
+                    <p class="text-muted lead mx-auto" style="max-width: 700px;">ההשתתפות שלך היא הלב של הדמוקרטיה.
+                        כשאתה מצביע, אתה לא רק בוחר - אתה משתתף בעיצוב המציאות.</p>
                 </div>
                 <div class="row g-4">
                     <div class="col-md-4 reveal">
@@ -202,7 +231,8 @@
                                 <i class="bi bi-megaphone"></i>
                             </div>
                             <h3 class="h4 mb-3">השפעה אזרחית</h3>
-                            <p class="text-muted">הזדמנות להשפיע על עתיד המדינה ועל ההחלטות שנוגעות לחיים של כולנו בצורה ישירה.</p>
+                            <p class="text-muted">הזדמנות להשפיע על עתיד המדינה ועל ההחלטות שנוגעות לחיים של כולנו בצורה
+                                ישירה.</p>
                         </div>
                     </div>
                     <div class="col-md-4 reveal">
@@ -211,7 +241,8 @@
                                 <i class="bi bi-people"></i>
                             </div>
                             <h3 class="h4 mb-3">השתתפות בדמוקרטיה</h3>
-                            <p class="text-muted">חיזוק הערכים הדמוקרטיים ויצירת חברה מעורבת ואכפתית יותר לכל אזרחיה.</p>
+                            <p class="text-muted">חיזוק הערכים הדמוקרטיים ויצירת חברה מעורבת ואכפתית יותר לכל אזרחיה.
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-4 reveal">
@@ -220,7 +251,8 @@
                                 <i class="bi bi-check2-circle"></i>
                             </div>
                             <h3 class="h4 mb-3">קול שווה לכל אזרח</h3>
-                            <p class="text-muted">בקלפי, לכל אחד מאיתנו יש כוח שווה. הקול שלך חשוב בדיוק כמו של כל אחד אחר.</p>
+                            <p class="text-muted">בקלפי, לכל אחד מאיתנו יש כוח שווה. הקול שלך חשוב בדיוק כמו של כל אחד
+                                אחר.</p>
                         </div>
                     </div>
                 </div>
@@ -238,34 +270,41 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-5 reveal">
                         <div class="position-relative">
-                            <img src="images/ballot.png" alt="איור של קלפי וטופס הצבעה" class="img-fluid rounded-5 shadow-lg">
-                            <div class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-5" style="z-index: -1; transform: translate(20px, 20px); opacity: 0.1;"></div>
+                            <img src="images/ballot.png" alt="איור של קלפי וטופס הצבעה"
+                                class="img-fluid rounded-5 shadow-lg">
+                            <div class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-5"
+                                style="z-index: -1; transform: translate(20px, 20px); opacity: 0.1;"></div>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="step-item reveal d-flex align-items-start p-4">
-                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: bold;">1</div>
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                                style="width: 40px; height: 40px; font-weight: bold;">1</div>
                             <div>
                                 <h4 class="h5 mb-1">בדיקת זכאות ומיקום</h4>
                                 <p class="mb-0 text-muted">בודקים זכאות ומיקום קלפי באתר ועדת הבחירות המרכזית.</p>
                             </div>
                         </div>
                         <div class="step-item reveal d-flex align-items-start p-4">
-                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: bold;">2</div>
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                                style="width: 40px; height: 40px; font-weight: bold;">2</div>
                             <div>
                                 <h4 class="h5 mb-1">הכנת תעודה מזהה</h4>
-                                <p class="mb-0 text-muted">מכינים תעודה מזהה (תעודת זהות, רישיון נהיגה או דרכון בתוקף).</p>
+                                <p class="mb-0 text-muted">מכינים תעודה מזהה (תעודת זהות, רישיון נהיגה או דרכון בתוקף).
+                                </p>
                             </div>
                         </div>
                         <div class="step-item reveal d-flex align-items-start p-4">
-                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: bold;">3</div>
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                                style="width: 40px; height: 40px; font-weight: bold;">3</div>
                             <div>
                                 <h4 class="h5 mb-1">תכנון זמן הגעה</h4>
                                 <p class="mb-0 text-muted">מתכננים זמן הגעה כדי להימנע מעומסים ולהספיק להצביע בנחת.</p>
                             </div>
                         </div>
                         <div class="step-item reveal d-flex align-items-start p-4">
-                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px; font-weight: bold;">4</div>
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0"
+                                style="width: 40px; height: 40px; font-weight: bold;">4</div>
                             <div>
                                 <h4 class="h5 mb-1">הצבעה בראש מורם</h4>
                                 <p class="mb-0 text-muted">מצביעים בצורה עצמאית ומכבדת, ושומרים על טוהר הבחירות.</p>
@@ -283,13 +322,15 @@
                     <div class="col-lg-8 reveal">
                         <div class="quiz-container border shadow-lg p-5">
                             <div class="text-center mb-5">
-                                <span class="text-primary fw-bold text-uppercase small tracking-widest">משימה אזרחית</span>
+                                <span class="text-primary fw-bold text-uppercase small tracking-widest">משימה
+                                    אזרחית</span>
                                 <h2 class="h1 mt-2">בדיקת מוכנות להצבעה</h2>
                                 <p class="text-muted">ענו על 5 שאלות קצרות ובדקו אם אתם מוכנים ליום הגדול.</p>
                             </div>
-                            
+
                             <div class="progress mb-4">
-                                <div id="quiz-progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div id="quiz-progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"
+                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
                             <form id="quiz-form">
@@ -342,7 +383,8 @@
                                 </fieldset>
 
                                 <fieldset class="quiz-question">
-                                    <legend class="h5">5. האם את/ה יודע/ת שניתן להיעזר בוועדת הקלפי במקרה הצורך?</legend>
+                                    <legend class="h5">5. האם את/ה יודע/ת שניתן להיעזר בוועדת הקלפי במקרה הצורך?
+                                    </legend>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="q5" id="q5y" value="yes">
                                         <label class="form-check-label" for="q5y">כן</label>
@@ -354,7 +396,8 @@
                                 </fieldset>
 
                                 <div class="text-center mt-4">
-                                    <button type="button" id="check-readiness" class="btn btn-primary btn-lg">בדיקת מוכנות</button>
+                                    <button type="button" id="check-readiness" class="btn btn-primary btn-lg">בדיקת
+                                        מוכנות</button>
                                 </div>
                             </form>
 
@@ -377,49 +420,64 @@
                         <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
                             <div class="accordion-item">
                                 <h3 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         מה צריך להביא לקלפי?
                                     </button>
                                 </h3>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        יש להצטייד בתעודה מזהה רשמית בתוקף: תעודת זהות, רישיון נהיגה או דרכון. אין צורך להביא את הודעת הבוחר שנשלחה אליכם בדואר, אם כי היא יכולה לסייע באיתור המיקום המדויק.
+                                        יש להצטייד בתעודה מזהה רשמית בתוקף: תעודת זהות, רישיון נהיגה או דרכון. אין צורך
+                                        להביא את הודעת הבוחר שנשלחה אליכם בדואר, אם כי היא יכולה לסייע באיתור המיקום
+                                        המדויק.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h3 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         האם ההצבעה חשאית?
                                     </button>
                                 </h3>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        כן, בהחלט. כל תהליך ההצבעה מאחורי הפרגוד הוא אישי וחשאי. אף אחד לא יכול לדעת מה הצבעתם, וזהו עקרון יסוד בדמוקרטיה.
+                                        כן, בהחלט. כל תהליך ההצבעה מאחורי הפרגוד הוא אישי וחשאי. אף אחד לא יכול לדעת מה
+                                        הצבעתם, וזהו עקרון יסוד בדמוקרטיה.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h3 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
                                         מה עושים אם לא יודעים איפה מצביעים?
                                     </button>
                                 </h3>
-                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        ניתן לבדוק את מיקום הקלפי באתר ועדת הבחירות המרכזית על ידי הזנת מספר תעודת זהות ותאריך ההנפקה שלה.
+                                        ניתן לבדוק את מיקום הקלפי באתר ועדת הבחירות המרכזית על ידי הזנת מספר תעודת זהות
+                                        ותאריך ההנפקה שלה.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h3 class="accordion-header" id="headingFour">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
                                         למה חשוב שכל אחד ישתתף?
                                     </button>
                                 </h3>
-                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                    data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        הבחירות הן הדרך שלנו לקבוע את פני המדינה. ככל שיותר אנשים משתתפים, כך התוצאות משקפות טוב יותר את רצון הציבור כולו. כל קול קובע!
+                                        הבחירות הן הדרך שלנו לקבוע את פני המדינה. ככל שיותר אנשים משתתפים, כך התוצאות
+                                        משקפות טוב יותר את רצון הציבור כולו. כל קול קובע!
                                     </div>
                                 </div>
                             </div>
@@ -436,10 +494,13 @@
                     <div class="col-lg-6 mb-5 mb-lg-0 reveal">
                         <span class="text-primary fw-bold text-uppercase small tracking-widest">צרו קשר</span>
                         <h2 class="h1 mb-4 mt-2">יש לכם שאלה?</h2>
-                        <p class="lead mb-4 text-muted">אנחנו כאן כדי לעזור לכם להבין את תהליך ההצבעה ולהבטיח שכל המידע שברשותכם נכון ונגיש לכולם.</p>
+                        <p class="lead mb-4 text-muted">אנחנו כאן כדי לעזור לכם להבין את תהליך ההצבעה ולהבטיח שכל המידע
+                            שברשותכם נכון ונגיש לכולם.</p>
                         <div class="position-relative">
-                            <img src="images/contact.png" alt="קהילה ישראלית מעורבת" class="img-fluid rounded-5 shadow-lg">
-                            <div class="bg-info position-absolute bottom-0 end-0 w-100 h-100 rounded-5" style="z-index: -1; transform: translate(-20px, -20px); opacity: 0.1;"></div>
+                            <img src="images/contact.png" alt="קהילה ישראלית מעורבת"
+                                class="img-fluid rounded-5 shadow-lg">
+                            <div class="bg-info position-absolute bottom-0 end-0 w-100 h-100 rounded-5"
+                                style="z-index: -1; transform: translate(-20px, -20px); opacity: 0.1;"></div>
                         </div>
 
                     </div>
@@ -448,19 +509,23 @@
                             <form id="contact-form">
                                 <div class="mb-4">
                                     <label for="fullName" class="form-label fw-semibold">שם מלא</label>
-                                    <input type="text" class="form-control bg-light border-0" id="fullName" placeholder="ישראל ישראלי" required>
+                                    <input type="text" class="form-control bg-light border-0" id="fullName"
+                                        placeholder="ישראל ישראלי" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="email" class="form-label fw-semibold">כתובת אימייל</label>
-                                    <input type="email" class="form-control bg-light border-0" id="email" placeholder="israel@example.com" required>
+                                    <input type="email" class="form-control bg-light border-0" id="email"
+                                        placeholder="israel@example.com" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="message" class="form-label fw-semibold">הודעה</label>
-                                    <textarea class="form-control bg-light border-0" id="message" rows="4" placeholder="איך נוכל לעזור?" required></textarea>
+                                    <textarea class="form-control bg-light border-0" id="message" rows="4"
+                                        placeholder="איך נוכל לעזור?" required></textarea>
                                 </div>
                                 <div class="mb-4 form-check">
                                     <input type="checkbox" class="form-check-input" id="agree" required>
-                                    <label class="form-check-label small text-muted" for="agree">אני מאשר/ת קבלת מידע נוסף בנושא עידוד הצבעה</label>
+                                    <label class="form-check-label small text-muted" for="agree">אני מאשר/ת קבלת מידע
+                                        נוסף בנושא עידוד הצבעה</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">שלח הודעה</button>
                             </form>
@@ -474,26 +539,82 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start">
-        <div class="container p-4">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center text-lg-end">
-                    <h5 class="text-uppercase mb-4">הקול שלי</h5>
-                    <p>הצבעה היא הלב הפועם של הדמוקרטיה שלנו. הצטרפו אלינו במימוש האחריות האזרחית של כולנו.</p>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Branding Column -->
+                <div class="col-lg-4 col-md-6 reveal">
+                    <div class="footer-branding mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="logo-icon-wrapper me-2" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                                <i class="bi bi-check2-square"></i>
+                            </div>
+                            <h4 class="mb-0 fw-bold text-white">הקול שלי</h4>
+                        </div>
+                        <p class="footer-desc">הצבעה היא הלב הפועם של הדמוקרטיה שלנו. הצטרפו אלינו במימוש האחריות האזרחית של כולנו ובבניית עתיד טוב יותר.</p>
+                        <div class="social-links d-flex gap-3 mt-4">
+                            <a href="#" class="social-link" aria-label="פייסבוק"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-link" aria-label="אינסטגרם"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-link" aria-label="טוויטר"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" class="social-link" aria-label="יוטיוב"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center text-lg-start">
-                    <h5 class="text-uppercase mb-4">ניווט מהיר</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#home">בית</a></li>
-                        <li><a href="#why-vote">למה להצביע?</a></li>
-                        <li><a href="#prep-steps">איך מתכוננים?</a></li>
-                        <li><a href="#quiz">בדיקת מוכנות</a></li>
-                    </ul>
+
+                <!-- Navigation Column -->
+                <div class="col-lg-4 col-md-6 reveal">
+                    <div class="footer-nav ms-lg-5">
+                        <h5 class="footer-title mb-4">ניווט מהיר</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="#home"><i class="bi bi-chevron-left small me-1"></i> דף הבית</a></li>
+                            <li><a href="#why-vote"><i class="bi bi-chevron-left small me-1"></i> למה להצביע?</a></li>
+                            <li><a href="#prep-steps"><i class="bi bi-chevron-left small me-1"></i> איך מתכוננים?</a></li>
+                            <li><a href="#quiz"><i class="bi bi-chevron-left small me-1"></i> בדיקת מוכנות</a></li>
+                            <li><a href="#contact"><i class="bi bi-chevron-left small me-1"></i> צור קשר</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="col-lg-4 col-md-12 reveal">
+                    <div class="footer-contact">
+                        <h5 class="footer-title mb-4">צור קשר</h5>
+                        <ul class="list-unstyled">
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-geo-alt-fill text-accent me-3 mt-1"></i>
+                                <span>ירושלים, בניין הכנסת (פרויקט לימודי)</span>
+                            </li>
+                            <li class="d-flex align-items-center mb-3">
+                                <i class="bi bi-envelope-fill text-accent me-3"></i>
+                                <a href="mailto:info@vote2026.org.il">info@vote2026.org.il</a>
+                            </li>
+                            <li class="d-flex align-items-center mb-3">
+                                <i class="bi bi-telephone-fill text-accent me-3"></i>
+                                <a href="tel:02-1234567" dir="ltr">02-1234567</a>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-3 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10">
+                            <small class="d-block text-white opacity-75 mb-1">שעות פעילות מוקד:</small>
+                            <span class="small fw-semibold">א'-ה': 09:00 - 18:00</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2026 הקול שלי | פרויקט לימודי בקורס פיתוח אתרי אינטרנט
+            
+            <hr class="mt-5 mb-4 border-white opacity-10">
+            
+            <div class="row align-items-center py-2">
+                <div class="col-md-6 text-center text-md-end mb-3 mb-md-0">
+                    <p class="mb-0 small opacity-75">© 2026 הקול שלי | כל הזכויות שמורות לפרויקט הלימודי</p>
+                </div>
+                <div class="col-md-6 text-center text-md-start">
+                    <div class="footer-bottom-links small opacity-75">
+                        <a href="#" class="me-3">מדיניות פרטיות</a>
+                        <a href="#" class="me-3">תנאי שימוש</a>
+                        <a href="#">הצהרת נגישות</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -508,4 +629,5 @@
     <!-- Custom JS -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
