@@ -119,11 +119,26 @@ document.addEventListener('DOMContentLoaded', () => {
             let score = 0;
             const totalQuestions = 5;
 
-            // Loop through the 5 questions
+            // Loop through the 5 questions and identify missing items
+            let missingItems = [];
+            const feedbackMap = {
+                1: "נא לבדוק את מיקום הקלפי שלך באתר ועדת הבחירות.",
+                2: "נא לוודא שיש לך תעודה מזהה בתוקף (תעודת זהות, רישיון או דרכון).",
+                3: "מומלץ לתכנן מראש את זמן ההגעה לקלפי כדי להימנע מעומסים.",
+                4: "חשוב לזכור שההצבעה היא אישית וחשאית לחלוטין.",
+                5: "זכור/י שניתן להיעזר בחברי ועדת הקלפי לכל שאלה טכנית."
+            };
+
             for (let i = 1; i <= totalQuestions; i++) {
                 const answer = document.querySelector(`input[name="q${i}"]:checked`);
-                if (answer && answer.value === 'yes') {
-                    score++;
+                if (answer) {
+                    if (answer.value === 'yes') {
+                        score++;
+                    } else {
+                        missingItems.push(feedbackMap[i]);
+                    }
+                } else {
+                    missingItems.push(`שאלה ${i}: נא לסמן תשובה.`);
                 }
             }
 
@@ -132,23 +147,37 @@ document.addEventListener('DOMContentLoaded', () => {
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.setAttribute('aria-valuenow', progressPercentage);
 
-            // Determine Message
-            let message = '';
+            // Determine Message and Class
             let alertClass = '';
+            let finalHtml = '';
 
-            if (score <= 2) {
-                message = "כדאי להתכונן עוד קצת לפני יום הבחירות.";
-                alertClass = 'alert-warning';
-            } else if (score <= 4) {
-                message = "את/ה כמעט מוכן/ה!";
-                alertClass = 'alert-info';
-            } else {
-                message = "מעולה! את/ה מוכן/ה ליום הבחירות.";
+            if (score === totalQuestions) {
+                finalHtml = `
+                    <div class="text-center">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 2rem;"></i>
+                        <p class="mt-2 mb-0"><strong>כל הכבוד!</strong> את/ה מוכן/ה לחלוטין ליום הבחירות. הקול שלך הולך להשפיע!</p>
+                    </div>
+                `;
                 alertClass = 'alert-success';
+            } else {
+                alertClass = score <= 2 ? 'alert-warning' : 'alert-info';
+                let listHtml = missingItems.map(item => `
+                    <li class="mb-2">
+                        <i class="bi bi-arrow-left-short text-primary"></i>
+                        ${item}
+                    </li>
+                `).join('');
+                finalHtml = `
+                    <div class="mb-2"><strong>נשאר לכם עוד קצת!</strong> כדי להיות מוכנים ב-100%, כדאי להשלים את הצעדים הבאים:</div>
+                    <ul class="list-unstyled mt-2 mb-0" style="text-align: right; padding-right: 0;">
+                        ${listHtml}
+                    </ul>
+                    <div class="mt-3 small text-muted">* ניתן למצוא את כל המידע הרלוונטי בסקשן "איך מתכוננים" למעלה.</div>
+                `;
             }
 
             // Show Result
-            quizResult.textContent = message;
+            quizResult.innerHTML = finalHtml;
             quizResult.className = `alert ${alertClass} mt-3 d-block`;
             quizResult.style.display = 'block';
         });
@@ -240,20 +269,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // הגדרות הגרף
         new Chart(ctx, {
-            type: 'line', // סוג הגרף: קו
+            type: 'line',
+            plugins: [ChartDataLabels], // רישום התוסף להצגת מספרים
             data: {
                 labels: ['2015', '2019א', '2019ב', '2020', '2021', '2022', '2026 (צפי)'],
                 datasets: [{
-                    label: 'אחוז מעורבות אזרחית (%)',
-                    data: [72, 68, 69, 71, 67, 70, 75],
+                    label: 'אחוז הבוחרים בפועל (%)',
+                    data: [72.3, 68.5, 69.8, 71.5, 67.4, 70.6, 74.2],
                     backgroundColor: 'rgba(75, 0, 130, 0.2)',
                     borderColor: 'rgba(75, 0, 130, 1)',
                     borderWidth: 3,
                     fill: true,
-                    tension: 0.4, // קימור הקו לאפקט מודרני
+                    tension: 0.4,
                     pointBackgroundColor: 'rgba(75, 0, 130, 1)',
-                    pointRadius: 5,
-                    pointHoverRadius: 8
+                    pointRadius: 6,
+                    pointHoverRadius: 9,
+                    datalabels: {
+                        align: 'top',
+                        offset: 5,
+                        backgroundColor: 'rgba(75, 0, 130, 0.1)',
+                        borderRadius: 4,
+                        padding: 4,
+                        font: { family: 'Assistant', weight: 'bold', size: 12 },
+                        formatter: (value) => value + '%'
+                    }
                 }]
             },
             options: {
@@ -261,31 +300,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 plugins: {
                     legend: {
                         display: true,
+                        position: 'top',
                         labels: {
-                            font: {
-                                family: 'Assistant',
-                                size: 14
-                            }
+                            font: { family: 'Assistant', size: 14, weight: 'bold' }
                         }
+                    },
+                    datalabels: {
+                        display: true, // הצגת המספרים על הגרף
+                        color: 'var(--primary-color)'
                     },
                     tooltip: {
                         backgroundColor: 'rgba(0, 0, 0, 0.8)',
                         padding: 12,
                         titleFont: { family: 'Assistant', size: 16 },
-                        bodyFont: { family: 'Assistant', size: 14 }
+                        bodyFont: { family: 'Assistant', size: 14 },
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '% מהאזרחים הצביעו';
+                            }
+                        }
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: false,
                         min: 60,
+                        max: 80,
+                        title: {
+                            display: true,
+                            text: 'אחוז הצבעה (%)',
+                            color: '#4B0082',
+                            font: { family: 'Assistant', size: 16, weight: '800' }
+                        },
                         ticks: {
-                            font: { family: 'Assistant' }
+                            font: { family: 'Assistant', size: 12 }
                         }
                     },
                     x: {
+                        title: {
+                            display: true,
+                            text: 'שנת בחירות',
+                            color: '#4B0082',
+                            font: { family: 'Assistant', size: 16, weight: '800' }
+                        },
                         ticks: {
-                            font: { family: 'Assistant' }
+                            font: { family: 'Assistant', size: 12 }
                         }
                     }
                 },
@@ -300,5 +359,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // הפעלת האינפוגרפיקה
     initInfographic();
 });
-
-
